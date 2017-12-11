@@ -1,0 +1,30 @@
+<ng2-toasty [position]="'top-right'"></ng2-toasty>
+
+<div fxLayout="column" fxLayoutAlign="center center">
+    <div style="width: 400px">
+        <mat-card>
+            <mat-card-title>
+                    Login
+            </mat-card-title>      
+            <mat-card-content>
+                <form  [formGroup]="formdata"  (ngSubmit)="login(formdata.value, formdata.valid)" autocomplete="off">
+                    <mat-form-field class="input-field">
+                        <input matInput placeholder="Username"formControlName="username" [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="formdata.controls['password'].errors?.required">
+                            Username is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <br>  
+                    <mat-form-field class="input-field">
+                            <input matInput placeholder="Enter your password" formControlName="password" [type]="hide ? 'password' : 'text'" [errorStateMatcher]="passwordMatcher">
+                            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                        <mat-error *ngIf="formdata.controls['password'].errors?.required">
+                            Password is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>    
+                    <button mat-raised-button color="primary" class="btn btn-block" type="submit">Login</button>           
+                </form>
+            </mat-card-content>        
+        </mat-card>
+    </div>
+</div>
