@@ -2,14 +2,16 @@ import { Injectable } from '@angular/core';
 import {Headers,Http} from '@angular/http';
 import { CanActivate,Router } from '@angular/router';
 import {ServerBasePath} from './server-base-path';
+import { JwtHelper } from 'angular2-jwt';
 
 
 @Injectable()
 export class AuthService {
 
   private serverPath=ServerBasePath.serverPath;
+  private jwtHelper: JwtHelper = new JwtHelper();
 
-  constructor(private http:Http) { }
+  constructor(private http:Http, private route: Router) { }
 
   login(data:any){
     let body = 'username=' + data.username + '&password=' + data.password + '&grant_type=password';
@@ -24,7 +26,7 @@ export class AuthService {
 
    logout(){
      localStorage.removeItem('accessToken');
-     return true;
+     this.route.navigate(['/login']);
    }
 
   registration(data:any,http:Http){
@@ -38,7 +40,22 @@ export class AuthService {
   }
 
   checkLogged(){
-    return !!localStorage.getItem('accessToken');
+    if (localStorage.getItem('accessToken')) {
+      const token = localStorage.getItem('accessToken');
+      return !this.jwtHelper.isTokenExpired(token);
+    }else {
+      return false;
+    }
+  }
+
+  getLoggedUserName() {
+    if (localStorage.getItem('accessToken')) {
+      const token = localStorage.getItem('accessToken');
+      const tokenDecode = this.jwtHelper.decodeToken(token);
+      return tokenDecode['unique_name'];
+    }
+
+    return null;
   }
 
 }

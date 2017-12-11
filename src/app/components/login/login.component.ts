@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
             timeout: 2000,
             theme: "default"
         });
-          location.reload();
+          this.route.navigate(['/']);
         },error=>{
           this.toastyService.error({
             title: "Login Failed!",

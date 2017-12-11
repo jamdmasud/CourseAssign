@@ -2,5 +2,5 @@ import {Injectable} from '@angular/core'
 
 
 export class ServerBasePath {
-    public static serverPath='http://localhost:51452';
+    public static serverPath='http://hms.a2zmanagementsystem.com';
 }
