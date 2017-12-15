@@ -48,6 +48,7 @@ import {HttpService} from './Services/authentications/http.service';
 import {AuthService} from './Services/authentications/auth.service';
 import {AuthGuard} from './Services/authentications/auth-guard.service';
 import { XlsxToJsonService } from './Services/Untilities/xlsx-to-json.service';
+import { CreditService } from './Services/data-services/credit.service'
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -124,8 +125,13 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     FlexLayoutModule
   ],
   exports:[BrowserModule, ToastyModule,RouterModule ],
-  providers: [XlsxToJsonService,AuthService,AuthGuard,
-    { provide: APP_BASE_HREF, useValue : '/' }
+  providers: [XlsxToJsonService,AuthService,AuthGuard,CreditService,
+    { provide: APP_BASE_HREF, useValue : '/' },
+    {
+      provide: HttpService,
+      useFactory: httpFactory,
+      deps: [XHRBackend, RequestOptions]
+    }
 ],
   
   bootstrap: [AppComponent]

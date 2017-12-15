@@ -8,11 +8,11 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CreditService {
 
-  public server = ServerBasePath;
+  public server = ServerBasePath.serverPath;
   constructor(private http: HttpService) { }
 
   saveTeacher(teacher: any):any {
-   return this.http.post(this.server + '', teacher).map(res => res.json());
+   return this.http.post(this.server + '/api/teacher/save', teacher).map(res => res.json());
   }
 
   saveCourses(teacher: any):any {

@@ -1,39 +1,59 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<ng2-toasty [position]="'top-right'"></ng2-toasty>
 <div style="text-align:center">
 
-  <h1>
-    Excel to JSON converter
-  </h1>
-  
-  <div>
-    <label for="">Select an .xlsx file to get json</label>
+  <mat-card>
+    <div class="row">
+      <div class="col-md-12">
+          <h1>
+              Upload Teacher List
+            </h1>
+      </div>
+    </div>
+      <div class="row">        
+        <div class="col-md-12">
+          <div class="col-md-6">
+              <div class="fileinput fileinput-new" data-provides="fileinput">
+                  <span class="btn btn-default btn-file"><span>Choose file</span>
+                  <input type="file" (change)="handleFile($event)"/></span>
+                  <span class="fileinput-filename"></span><span class="fileinput-new">No file chosen</span>
+                </div>
+          </div>
+          <div class="col-md-6" *ngIf="teacher && teacher.length>0" >
+              <button  mat-raised-button color="accent" (click)="saveTeacher()">Submit</button> 
+          </div>
+        </div>
+      </div>
+    </mat-card>
     <br>
-    <input type="file" (change)="handleFile($event)" />
-  </div>
+    <mat-card *ngIf="teacher && teacher.length>0">
+              <div>        
+                  <table class="table table-bordered table-hover table-condense">
+                    <thead>
+                      <tr>
+                          <th>SL</th>
+                          <th>Name</th>
+                          <th>Initial</th>
+                          <th>Designation</th>
+                          <th>Cell Number</th>
+                          <th>Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let t of teacher" style="text-align:left">
+                          <td>{{t.SL}}</td>
+                          <td>{{t.Name}}</td>
+                          <td>{{t.Initial}}</td>
+                          <td>{{t.Designation}}</td>
+                          <td style="text-align:right">{{t.CellNumber}}</td>
+                          <td>{{t.Email}}</td>
+                      </tr>        
+                    </tbody>
+                  </table>
+                 <br>                  
+              </div>  
+    </mat-card>  
+
+
+
   
-  <div class="result-container" *ngIf="result && result.length>0">
-     
-      <table class="table table-bordered table-hover table-condense">
-        <thead>
-          <tr>
-              <th>SL</th>
-              <th>Name</th>
-              <th>Initial</th>
-              <th>Designation</th>
-              <th>Cell Number</th>
-              <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let t of teacher" style="text-align:left">
-              <td>{{t.SL}}</td>
-              <td>{{t.Name}}</td>
-              <td>{{t.Initial}}</td>
-              <td>{{t.Designation}}</td>
-              <td style="text-align:right">{{t.CellNumber}}</td>
-              <td>{{t.Email}}</td>
-          </tr>        
-        </tbody>
-      </table>
-     <br> 
-  </div>

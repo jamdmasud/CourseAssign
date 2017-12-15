@@ -4,3 +4,18 @@ overflow: auto;
 border-radius: 4px;
 padding: 10px
 }
+.example-button-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .mat-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
