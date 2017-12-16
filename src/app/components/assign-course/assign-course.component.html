@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-12">
+    <mat-card>
+      <form>
+        <div class="row">
+        <div class="col-md-6">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Teacher" aria-label="Teacher" [matAutocomplete]="auto" [formControl]="stateCtrl">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option  (onSelectionChange)="SelectTeacher(state)" *ngFor="let state of filteredTeacher | async" [value]="state.Name"> 
+                <span class="auto-title">{{ state.Name }}</span> |
+                <small class="sub-title">Initial: {{state.Initial}}</small>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+       
+          <div class="col-md-3" *ngIf="SelectedTeacher">  
+            <mat-chip-list>             
+              <mat-chip color="primary" style="width:100%"><h4>Taken credit: {{takenCredit}}</h4></mat-chip>
+            </mat-chip-list>              
+          </div>
+          <div class="col-md-3" *ngIf="SelectedTeacher">
+              <mat-chip color="accent"style="width:100%" selected="true"><h4>Assigned Credit: {{remainingCredit}}</h4></mat-chip>
+          </div>
+      </div>
+      </form>
+    </mat-card>
+  </div>
+</div>
+

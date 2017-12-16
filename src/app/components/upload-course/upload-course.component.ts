@@ -6,34 +6,32 @@ import {ToastyService, ToastyConfig, ToastOptions, ToastData} from 'ng2-toasty';
 import { AuthGuard,AuthService } from '../../Services/authentications/auth.service' 
 
 @Component({
-  selector: 'app-submit-excel',
-  templateUrl: './submit-excel.component.html',
-  styleUrls: ['./submit-excel.component.css']
+  selector: 'app-upload-course',
+  templateUrl: './upload-course.component.html',
+  styleUrls: ['./upload-course.component.css']
 })
-
-export class SubmitExcelComponent implements OnInit {
-
+export class UploadCourseComponent implements OnInit {
   title = 'app'; 
   public result:any;
   public data:any;
-  public teacher:any;
-  constructor(private route: Router, private auth: AuthService, private xlsxToJsonService: XlsxToJsonService, private credit: CreditService,private toastyService:ToastyService, private toastyConfig: ToastyConfig){
-    this.toastyConfig.theme='material';
+  public courses:any;
+  constructor(private route: Router, private auth: AuthService, private xlsxToJsonService: XlsxToJsonService, private credit: CreditService,private toastyService:ToastyService, private toastyConfig: ToastyConfig) { }
+
+  ngOnInit() {
   }
-  uploadTeacher(event) {
+
+  uploadCourse(event) {
     let file = event.target.files[0];
     this.xlsxToJsonService.processFileToJson({}, file).subscribe(data => {
       this.result = JSON.stringify(data['sheets'].Sheet1); 
       this.data = JSON.parse(this.result);
-      this.teacher = data.sheets.Sheet1;      
+      this.courses = data.sheets.Sheet1
     })
   }
 
-  ngOnInit() {
-  };
 
-  saveTeacher(){
-    this.credit.saveTeacher(this.teacher).subscribe(response => {   
+  saveCourses(){
+    this.credit.saveCourses(this.courses).subscribe(response => {   
       this.toastyService.success({
         title: "Successful!",
         msg: response,
@@ -41,7 +39,7 @@ export class SubmitExcelComponent implements OnInit {
         timeout: 4000,
         theme: "default"
     });
-    this.teacher = {}
+    this.courses = {}
     },error =>{
       this.toastyService.error({
         title: "Failed!",
@@ -52,4 +50,5 @@ export class SubmitExcelComponent implements OnInit {
     });
     })
   }
+
 }

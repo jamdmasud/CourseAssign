@@ -1,0 +1,58 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<ng2-toasty [position]="'top-right'"></ng2-toasty>
+<div style="text-align:center">
+
+  <mat-card>
+    <div class="row">
+      <div class="col-md-12">
+          <h1>
+              Upload Course List
+            </h1>
+      </div>
+    </div>
+      <div class="row">        
+        <div class="col-md-12">
+          <div class="col-md-6">
+              <div class="fileinput fileinput-new" data-provides="fileinput">
+                  <span class="btn btn-default btn-file"><span>Choose file</span>
+                  <input type="file" (change)="uploadCourse($event)"/></span>
+                  <span class="fileinput-filename"></span><span class="fileinput-new">No file chosen</span>
+                </div>
+          </div>
+          <div class="col-md-6" *ngIf="courses && courses.length>0" >
+              <button  mat-raised-button color="accent" (click)="saveCourses()">Submit</button> 
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <br>
+    <mat-card *ngIf="courses && courses.length>0">
+             <div>        
+                <table class="table table-bordered table-hover table-condense">
+                  <thead>
+                    <tr>
+                        <th>SL</th>
+                        <th>Name</th>
+                        <th>Credit Per Section</th>
+                        <th>Total Credit</th>
+                        <th>Batch</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let course of courses" style="text-align:left">
+                        <td>{{course.SL}}</td>
+                        <td>{{course.Name}}</td>
+                        <td>{{course.CreditPerSection}}</td>
+                        <td>{{course.TotalCredit}}</td>
+                        <td>{{course.Batch}}</td>
+                    </tr>        
+                  </tbody>
+                </table>
+               <br>                  
+            </div>  
+    </mat-card>  
+
+
+
+  
+

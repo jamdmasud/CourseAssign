@@ -15,8 +15,8 @@ export class CreditService {
    return this.http.post(this.server + '/api/teacher/save', teacher).map(res => res.json());
   }
 
-  saveCourses(teacher: any):any {
-    return this.http.post(this.server + '', teacher).map(res => res.json());
+  saveCourses(course: any):any {
+    return this.http.post(this.server + '/api/course/save', course).map(res => res.json());
   }
 
   saveAssignCourse(teacher: any):any {

@@ -61,6 +61,10 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HomeComponent } from './components/home/home.component';
+import { UploadCourseComponent } from './components/upload-course/upload-course.component';
+import { AssignCourseComponent } from './components/assign-course/assign-course.component';
+import { TeacherDataServicesService } from './Services/data-services/teacher-data-services.service'
+import { CourseServiceService } from './Services/data-services/course-service.service'
 
 export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions) {
   return new HttpService(backend, defaultOptions);
@@ -80,7 +84,9 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
-    HomeComponent,    
+    HomeComponent,
+    UploadCourseComponent,
+    AssignCourseComponent,    
   ],
   imports: [
     MatAutocompleteModule,
@@ -125,7 +131,7 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     FlexLayoutModule
   ],
   exports:[BrowserModule, ToastyModule,RouterModule ],
-  providers: [XlsxToJsonService,AuthService,AuthGuard,CreditService,
+  providers: [XlsxToJsonService,AuthService,AuthGuard,CreditService,TeacherDataServicesService,CourseServiceService,
     { provide: APP_BASE_HREF, useValue : '/' },
     {
       provide: HttpService,
