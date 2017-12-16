@@ -7,6 +7,7 @@ import {RouterModule, Routes, DefaultUrlSerializer, UrlTree} from '@angular/rout
 
 //Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -49,8 +50,8 @@ import {AuthService} from './Services/authentications/auth.service';
 import {AuthGuard} from './Services/authentications/auth-guard.service';
 import { XlsxToJsonService } from './Services/Untilities/xlsx-to-json.service';
 import { CreditService } from './Services/data-services/credit.service'
+import { SectionServicesService} from './Services/data-services/section-services.service';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 //Components
 import {AppComponent} from './app.component'
@@ -132,6 +133,7 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
   ],
   exports:[BrowserModule, ToastyModule,RouterModule ],
   providers: [XlsxToJsonService,AuthService,AuthGuard,CreditService,TeacherDataServicesService,CourseServiceService,
+    SectionServicesService,
     { provide: APP_BASE_HREF, useValue : '/' },
     {
       provide: HttpService,

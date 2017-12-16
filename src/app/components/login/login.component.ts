@@ -6,13 +6,7 @@ import {ToastyService, ToastyConfig, ToastOptions, ToastData} from 'ng2-toasty';
 import {ErrorStateMatcher} from '@angular/material/core';
 
 import {AuthService} from '../../Services/authentications/auth.service';
-
-export class CourseAssignmentErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
+import { CourseAssignmentErrorStateMatcher} from '../../HelperClasses/CourseAssignmentErrorStateMatcher'
 
 @Component({
   selector: 'app-login',
@@ -58,8 +52,6 @@ export class LoginComponent implements OnInit {
   passwordMatcher = new CourseAssignmentErrorStateMatcher();
 
   login(data,valid){
-    console.log(valid);
-    console.log(data);
     if(valid){
         this.auth.login(data).subscribe(response=>{
           this.toastyService.success({
