@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-12">
     <mat-card>
-      <form>
+      <form >
         <div class="row">
         <div class="col-md-6">
           <mat-form-field class="example-full-width">
@@ -48,7 +48,7 @@
           </mat-form-field>     
         </div>
         <div class="col-md-3">
-            <button mat-raised-button color="primary"><span class="glyphicon glyphicon-plus"></span></button>
+            <button mat-raised-button color="primary" (click)="assignCourse()" ><span class="glyphicon glyphicon-plus"></span></button>
         </div>
       </div>
       </form>
@@ -59,41 +59,23 @@
 <div class="row">
   <div class="col-md-12">
     <ul>
-      <li>
+      <li *ngFor="let item of SelectedCourseList">
         <div class="col-md-4 padding-10">
           <mat-card>
-              <h1>hello world 1  </h1>
+              <div class="row">
+                <div class="col-md-12">
+                  <h3 class="teacher-name">{{item.TeacherName}}</h3>
+                </div>
+                <div class="col-md-12 course-name">
+                  <strong>Course : </strong> {{ item.CourseName}}</div>
+                <div class="col-md-8 section-batch">
+                  <strong>Semester: </strong> {{item.Semester}}</div>
+                <div class="col-md-4 section-batch">
+                  <strong>Section: </strong>{{item.SectionName}}</div>
+              </div>
           </mat-card>
         </div>
-      </li>
-      <li>
-          <div class="col-md-4 padding-10">
-            <mat-card>
-                <h1>hello world 2</h1>
-            </mat-card>
-          </div>
-        </li>
-        <li>
-            <div class="col-md-4 padding-10">
-              <mat-card>
-                  <h1>hello world 1  </h1>
-              </mat-card>
-            </div>
-          </li>
-          <li>
-              <div class="col-md-4 padding-10">
-                <mat-card>
-                    <h1>hello world 2</h1>
-                </mat-card>
-              </div>
-            </li>
-            <li>
-                <div class="col-md-4 padding-10">
-                  <mat-card>
-                      <h1>hello world 2</h1>
-                  </mat-card>
-                </div>
-              </li>
+      </li>      
     </ul>
   </div>
 </div>

@@ -28,3 +28,15 @@
 .padding-10{
   padding: 10px;
 }
+.teacher-name{
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 900;
+  font-size: 14px;
+  font-style: italic;
+}
+.section-batch{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 10px;
+  color: darkslategrey;
+}
