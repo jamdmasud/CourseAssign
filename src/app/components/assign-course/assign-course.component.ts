@@ -92,7 +92,6 @@ export class AssignCourseComponent implements OnInit {
       this.SelectedTeacher = teacher;
       this.takenCredit =  this.SelectedTeacher.TakenCredit;
       this.remainingCredit = this.SelectedTeacher.RemainingCredit;
-      this.remainingCredit -= 2;
       //Load courses for autocomplete after selecting teacher
       this.getAllCourse();
       this.tCount = 1;
