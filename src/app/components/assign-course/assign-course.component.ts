@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {MatAutocompleteSelectedEvent} from '@angular/material/';
+import {MatOptionSelectionChange, MatAutocompleteSelectedEvent} from '@angular/material/';
 import {Observable} from 'rxjs/Observable';
 import {startWith} from 'rxjs/operators/startWith';
 import {map} from 'rxjs/operators/map';
@@ -13,6 +13,7 @@ import { AssignValidation } from '../../Models/AssignValidation'
 import { CourseAssign } from '../../Models/CourseAssign'
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
+import { CreditService } from '../../Services/data-services/credit.service';
 
 export class State {
   constructor(public Name: string, public Initial: string, public Id: string) { }
@@ -44,7 +45,7 @@ export class AssignCourseComponent implements OnInit {
   SelectedCourseList:CourseAssign[];
   selected:any;
 
-  constructor(private toastyService:ToastyService, private toastyConfig: ToastyConfig,private teacherData: TeacherDataServicesService, private courseService: CourseServiceService, private sectionService: SectionServicesService) {
+  constructor(private toastyService:ToastyService, private toastyConfig: ToastyConfig,private teacherData: TeacherDataServicesService, private courseService: CourseServiceService, private sectionService: SectionServicesService, private creditService: CreditService) {
     this.teacherCtrl = new FormControl();
     this.courseCtrl = new FormControl();
     this.sectionCtrl = new FormControl();
@@ -87,8 +88,8 @@ export class AssignCourseComponent implements OnInit {
       course.Name.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
 
-  SelectTeacher(teacher){
-    if(this.tCount == 0){
+  SelectTeacher(ev:MatOptionSelectionChange,teacher){
+    if(ev.source.selected){
       this.SelectedTeacher = teacher;
       this.takenCredit =  this.SelectedTeacher.TakenCredit;
       this.remainingCredit = this.SelectedTeacher.RemainingCredit;
@@ -98,8 +99,8 @@ export class AssignCourseComponent implements OnInit {
     }
   }
 
-  SelectdCourse(course){
-    if(this.counts == 0){
+  SelectdCourse(ev:MatOptionSelectionChange,course){
+    if(ev.source.selected){
       this.SelectedCourse = course;  
       this.getSectionByBatchId(this.SelectedCourse.BatchId);
       this.counts = 1;
@@ -108,7 +109,7 @@ export class AssignCourseComponent implements OnInit {
 
 
   SelectdSection(sec){
-    this.validation.CourseId = this.SelectedCourse.Id;
+    this.validation.CourseId = this.SelectedCourse.Id; 
     this.validation.SectionId = sec;
     this.validation.TeacherId = this.SelectedTeacher.Id;
     this.courseService.IsCourseAssigned(this.validation).subscribe(response => {
@@ -163,17 +164,40 @@ export class AssignCourseComponent implements OnInit {
     //console.log(this.SelectedCourse)
     if(this.remainingCredit < 0)
     {
-      alert("You can't assign more than " + credit + " Credit to " +   teacherName);
+      this.toastyService.error({
+        title: "Failed!",
+        msg: "You can't assign more than " + credit + " Credit to " +   teacherName,
+        showClose: true,
+        timeout: 5000,
+        theme: "default"
+      }); 
       this.remainingCredit = credit;
     }else{
-      this.SelectedCourseList.push(this.courseAssign);
-      this.counts = 0;
-      this.tCount = 0;
+      this.creditService.saveAssignCourse(this.courseAssign).subscribe(response => {
+        this.SelectedCourseList.push(this.courseAssign);
+        this.counts = 0;
+        this.tCount = 0;
+        this.SelectedCourse = {};
+        this.SelectedTeacher = {};
+        this.courseAssign = new CourseAssign();
+        this.courseCtrl.setValue("")
+        this.toastyService.success({
+          title:"Success",
+          msg: response,
+          showClose: true,
+          timeout:3000,
+          theme: "default"
+        });
+      }, error =>{
+        this.toastyService.error({
+          title: "Failed!",
+          msg: error.json().Message,
+          showClose: true,
+          timeout: 5000,
+          theme: "default"
+        }); 
+      })      
     }
-    console.log(this.SelectedCourseList);
-    this.courseAssign = new CourseAssign();
-
-    this.courseCtrl.setValue("")
   }
 
 }

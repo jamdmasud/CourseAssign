@@ -40,3 +40,6 @@
   font-size: 10px;
   color: darkslategrey;
 }
+.course-name{
+  min-height: 40px !important;
+}

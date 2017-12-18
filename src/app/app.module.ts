@@ -65,7 +65,8 @@ import { HomeComponent } from './components/home/home.component';
 import { UploadCourseComponent } from './components/upload-course/upload-course.component';
 import { AssignCourseComponent } from './components/assign-course/assign-course.component';
 import { TeacherDataServicesService } from './Services/data-services/teacher-data-services.service'
-import { CourseServiceService } from './Services/data-services/course-service.service'
+import { CourseServiceService } from './Services/data-services/course-service.service';
+import { AddCourseComponent } from './components/add-course/add-course.component'
 
 export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions) {
   return new HttpService(backend, defaultOptions);
@@ -87,7 +88,8 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     SidebarComponent,
     HomeComponent,
     UploadCourseComponent,
-    AssignCourseComponent,    
+    AssignCourseComponent,
+    AddCourseComponent,    
   ],
   imports: [
     MatAutocompleteModule,

@@ -8,13 +8,14 @@ import {SubmitExcelComponent} from './components/submit-excel/submit-excel.compo
 import { HomeComponent } from './components/home/home.component';
 import { UploadCourseComponent } from './components/upload-course/upload-course.component'
 import { AssignCourseComponent } from './components/assign-course/assign-course.component'
-
+import {AddCourseComponent } from './components/add-course/add-course.component';
 const routes: Routes = [  
   {path:'', component:HomeComponent, children: [
     {path: '', redirectTo: 'upload-teacher', pathMatch: 'full'},
     {path:'upload-teacher', component: SubmitExcelComponent, canActivate: [AuthGuard]},
     {path:'upload-courses', component: UploadCourseComponent, canActivate: [AuthGuard]},
-    {path:'assign-course', component: AssignCourseComponent, canActivate: [AuthGuard]}
+    {path:'assign-course', component: AssignCourseComponent, canActivate: [AuthGuard]},
+    {path:'add-course', component: AddCourseComponent, canActivate: [AuthGuard]}
   ]},
   {path: 'login', component: LoginComponent}
 ];

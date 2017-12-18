@@ -9,7 +9,7 @@
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Teacher" aria-label="Teacher" [matAutocomplete]="auto" [formControl]="teacherCtrl">
             <mat-autocomplete #auto="matAutocomplete">
-              <mat-option  (onSelectionChange)="SelectTeacher(teacher)" *ngFor="let teacher of filteredTeacher | async" [value]="teacher.Name"> 
+              <mat-option  (onSelectionChange)="SelectTeacher($event,teacher)" *ngFor="let teacher of filteredTeacher | async" [value]="teacher.Name"> 
                 <span class="auto-title">{{ teacher.Name }}</span> |
                 <small class="sub-title">Initial: {{teacher.Initial}}</small>
               </mat-option>
@@ -31,7 +31,7 @@
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Course" aria-label="Course" [matAutocomplete]="course" [formControl]="courseCtrl">
             <mat-autocomplete #course="matAutocomplete">
-              <mat-option  (onSelectionChange)="SelectdCourse(course)" *ngFor="let course of filteredCourse | async" [value]="course.Name"> 
+              <mat-option  (onSelectionChange)="SelectdCourse($event,course)" *ngFor="let course of filteredCourse | async" [value]="course.Name"> 
                 <span class="auto-title">{{ course.Name }}</span> |
                 <small class="sub-title">Semester: {{course.Batch}}</small>
               </mat-option>
