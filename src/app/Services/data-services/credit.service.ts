@@ -11,9 +11,13 @@ export class CreditService {
   public server = ServerBasePath.serverPath;
   constructor(private http: HttpService) { }
 
-  saveTeacher(teacher: any):any {
-   return this.http.post(this.server + '/api/teacher/save', teacher).map(res => res.json());
+  saveTeacher(teachers: any):any {
+   return this.http.post(this.server + '/api/teacher/save', teachers).map(res => res.json());
   }
+
+  saveTeacherSingle(teacher: any):any {
+    return this.http.post(this.server + '/api/teacher/save-single', teacher).map(res => res.json());
+   }
 
   saveCourses(course: any):any {
     return this.http.post(this.server + '/api/course/save', course).map(res => res.json());
@@ -26,5 +30,7 @@ export class CreditService {
   saveCourse(course: any):any {
     return this.http.post(this.server + '/api/course/save-single', course).map(res => res.json());
   }
-
+  saveSection(section: any):any {
+    return this.http.post(this.server + '/api/section/save', section).map(res => res.json());
+  }
 }

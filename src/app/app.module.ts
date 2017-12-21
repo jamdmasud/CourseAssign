@@ -51,7 +51,8 @@ import {AuthGuard} from './Services/authentications/auth-guard.service';
 import { XlsxToJsonService } from './Services/Untilities/xlsx-to-json.service';
 import { CreditService } from './Services/data-services/credit.service'
 import { SectionServicesService} from './Services/data-services/section-services.service';
-
+import { BatchService } from './Services/data-services/batch.service'
+import { JsonToXlsxService } from './Services/Untilities/json-to-xlsx.service'
 
 //Components
 import {AppComponent} from './app.component'
@@ -66,7 +67,14 @@ import { UploadCourseComponent } from './components/upload-course/upload-course.
 import { AssignCourseComponent } from './components/assign-course/assign-course.component';
 import { TeacherDataServicesService } from './Services/data-services/teacher-data-services.service'
 import { CourseServiceService } from './Services/data-services/course-service.service';
-import { AddCourseComponent } from './components/add-course/add-course.component'
+import { AddCourseComponent } from './components/add-course/add-course.component';
+import { AddSectionComponent } from './components/add-section/add-section.component';
+import { AddTeacherComponent } from './components/add-teacher/add-teacher.component';
+import { ViewAssignedComponent } from './components/view-assigned/view-assigned.component';
+import { SearchPipe } from './Models/search.pipe';
+import { TeacherCreditComponent } from './components/teacher-credit/teacher-credit.component';
+import { CourseCreditComponent } from './components/course-credit/course-credit.component'
+
 
 export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions) {
   return new HttpService(backend, defaultOptions);
@@ -89,7 +97,13 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     HomeComponent,
     UploadCourseComponent,
     AssignCourseComponent,
-    AddCourseComponent,    
+    AddCourseComponent,
+    AddSectionComponent,
+    AddTeacherComponent,
+    ViewAssignedComponent,
+    SearchPipe,
+    TeacherCreditComponent,
+    CourseCreditComponent,    
   ],
   imports: [
     MatAutocompleteModule,
@@ -135,7 +149,7 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
   ],
   exports:[BrowserModule, ToastyModule,RouterModule ],
   providers: [XlsxToJsonService,AuthService,AuthGuard,CreditService,TeacherDataServicesService,CourseServiceService,
-    SectionServicesService,
+    SectionServicesService,BatchService,JsonToXlsxService,
     { provide: APP_BASE_HREF, useValue : '/' },
     {
       provide: HttpService,

@@ -1,6 +1,6 @@
 
 export class AssignValidation{
-    public TeacherId:string;
-    public CourseId:string;
-    public SectionId:string;
+    public teacherId:string;
+    public courseId:string;
+    public sectionId:string;
 }

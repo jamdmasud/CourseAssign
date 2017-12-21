@@ -18,4 +18,12 @@ export class CourseServiceService {
    IsCourseAssigned(model: AssignValidation):any{
     return this.http.post(this.server + '/api/course/is-course-assigned', model).map(res => res.json());
    }
+
+   CourseRemainingCredit():any{
+    return this.http.get(this.server + '/api/teacher/remaining-course-credit').map(res => res.json());
+   }
+
+   assignedCourses():any{
+    return this.http.get(this.server + '/api/teacher/assigned-courses').map(res => res.json());
+   }
 }

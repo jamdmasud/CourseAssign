@@ -18,10 +18,14 @@
         </mat-form-field>
       </div>
       <div class="col-lg-6">
-        <mat-form-field class="input-field">
-          <input matInput placeholder="Batch Name" formControlName="batch">
-          <mat-error *ngIf="courseForm.controls['batch'].errors?.required">
-            <strong>Batch</strong> Name is required</mat-error>
+          <mat-form-field class="input-field">
+              <mat-select  formControlName="batchId"  placeholder="Select Batch">
+                <mat-option *ngFor="let batche of batches" [value]="batche.id">
+                  {{ batche.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="courseForm.controls['batchId'].errors?.required">
+                  <strong>Batch</strong> is required</mat-error>    
         </mat-form-field>
       </div>
       <div class="col-lg-6">

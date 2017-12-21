@@ -16,7 +16,7 @@ import 'rxjs/add/operator/map';
 import { CreditService } from '../../Services/data-services/credit.service';
 
 export class State {
-  constructor(public Name: string, public Initial: string, public Id: string) { }
+  constructor(public name: string, public initial: string, public id: string) { }
 }
 
 @Component({
@@ -63,6 +63,7 @@ export class AssignCourseComponent implements OnInit {
   getAllTeacher(){
     this.teacherData.getAllTeacher().subscribe(response => {
       this.teachers = response;
+      console.log(this.teachers)
       this.filteredTeacher = this.teacherCtrl.valueChanges
       .startWith(null)
         .map(state => state ? this.filterteachers(state) : this.teachers.slice()) 
@@ -80,44 +81,57 @@ export class AssignCourseComponent implements OnInit {
 
   filterteachers(name: string) {
     return this.teachers.filter(state =>
-      state.Name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+      state.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
   
   filterCourse(name: string) {
     return this.courses.filter(course =>
-      course.Name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+      course.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
 
   SelectTeacher(ev:MatOptionSelectionChange,teacher){
     if(ev.source.selected){
       this.SelectedTeacher = teacher;
-      this.takenCredit =  this.SelectedTeacher.TakenCredit;
-      this.remainingCredit = this.SelectedTeacher.RemainingCredit;
+      this.getPresentCredit(teacher.id);  
       //Load courses for autocomplete after selecting teacher
       this.getAllCourse();
       this.tCount = 1;
     }
   }
 
+getPresentCredit(id:string){
+this.teacherData.getPresentCredit(id).subscribe(response => {
+  this.takenCredit =  response.takenCredit;
+  this.remainingCredit = response.remainingCredit;
+}, error=>{
+  this.toastyService.error({
+    title: "Assigned",
+    msg: error.json().message,
+    showClose: true,
+    timeout: 3000,
+    theme: "default"
+  });
+})
+}
+
   SelectdCourse(ev:MatOptionSelectionChange,course){
     if(ev.source.selected){
       this.SelectedCourse = course;  
-      this.getSectionByBatchId(this.SelectedCourse.BatchId);
+      this.getSectionByBatchId(this.SelectedCourse.batchId);
       this.counts = 1;
     }
   }
 
-
   SelectdSection(sec){
-    this.validation.CourseId = this.SelectedCourse.Id; 
-    this.validation.SectionId = sec;
-    this.validation.TeacherId = this.SelectedTeacher.Id;
+    this.validation.courseId = this.SelectedCourse.id; 
+    this.validation.sectionId = sec;
+    this.validation.teacherId = this.SelectedTeacher.id;
     this.courseService.IsCourseAssigned(this.validation).subscribe(response => {
-      if(response.IsAssigned)
+      if(response.isAssigned)
       {
         this.toastyService.error({
           title: "Assigned",
-          msg: 'This course is already assigned to '  + response.Name,
+          msg: 'This course is already assigned to '  + response.name,
           showClose: true,
           timeout: 3000,
           theme: "default"
@@ -127,7 +141,7 @@ export class AssignCourseComponent implements OnInit {
     }, error => { 
       this.toastyService.error({
         title: "Assigned",
-        msg: error.json().Message,
+        msg: error.json().message,
         showClose: true,
         timeout: 3000,
         theme: "default"
@@ -141,7 +155,7 @@ export class AssignCourseComponent implements OnInit {
     }, error =>{
       this.toastyService.error({
         title: "Failed!",
-        msg: error.json().Message,
+        msg: error.json().message,
         showClose: true,
         timeout: 5000,
         theme: "default"
@@ -151,16 +165,16 @@ export class AssignCourseComponent implements OnInit {
   
   assignCourse():void{
     let credit = this.remainingCredit;
-    let teacherName = this.SelectedTeacher.Name;
-    this.remainingCredit -= this.SelectedCourse.CreditPerSection;
-    let section = this.Sections.find(x => x.Id == this.selectedSectionId) 
-    this.courseAssign.CourseId = this.SelectedCourse.Id;
-    this.courseAssign.CourseName = this.SelectedCourse.Name;
-    this.courseAssign.SectionName = section.Name;
-    this.courseAssign.SectionId = section.Id;
-    this.courseAssign.TeacherId = this.SelectedTeacher.Id;
-    this.courseAssign.TeacherName = teacherName;
-    this.courseAssign.Semester = this.SelectedCourse.Batch; 
+    let teacherName = this.SelectedTeacher.name;
+    this.remainingCredit -= this.SelectedCourse.creditPerSection;
+    let section = this.Sections.find(x => x.id == this.selectedSectionId) 
+    this.courseAssign.courseId = this.SelectedCourse.id;
+    this.courseAssign.courseName = this.SelectedCourse.name;
+    this.courseAssign.sectionName = section.name;
+    this.courseAssign.sectionId = section.id;
+    this.courseAssign.teacherId = this.SelectedTeacher.id;
+    this.courseAssign.teacherName = teacherName;
+    this.courseAssign.semester = this.SelectedCourse.batch; 
     //console.log(this.SelectedCourse)
     if(this.remainingCredit < 0)
     {
@@ -178,9 +192,9 @@ export class AssignCourseComponent implements OnInit {
         this.counts = 0;
         this.tCount = 0;
         this.SelectedCourse = {};
-        this.SelectedTeacher = {};
         this.courseAssign = new CourseAssign();
-        this.courseCtrl.setValue("")
+        this.courseCtrl.setValue("");
+        this.sectionCtrl.setValue("");
         this.toastyService.success({
           title:"Success",
           msg: response,
@@ -191,7 +205,7 @@ export class AssignCourseComponent implements OnInit {
       }, error =>{
         this.toastyService.error({
           title: "Failed!",
-          msg: error.json().Message,
+          msg: error.json().message,
           showClose: true,
           timeout: 5000,
           theme: "default"

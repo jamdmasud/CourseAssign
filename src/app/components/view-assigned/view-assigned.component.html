@@ -1,0 +1,28 @@
+<h3>Assigned Courses</h3>
+<button class="btn btn-success" (click)="export()">Export</button>
+<mat-form-field class="example-full-width">
+  <input type="text" matInput #search placeholder="Search by Teacher Name" autocomplete="off"/>
+</mat-form-field>
+<div class="row">
+  <div class="col-md-12">
+    <ul>
+      <li *ngFor="let item of assignedCourses | search: search.value">
+        <div class="col-md-4 padding-10">
+          <mat-card>
+              <div class="row">
+                <div class="col-md-12">
+                  <h3 class="teacher-name">{{item.teacher}}</h3>
+                </div>
+                <div class="col-md-12 course-name">
+                  <strong>Course : </strong> {{ item.course}}</div>
+                <div class="col-md-8 section-batch">
+                  <strong>Semester: </strong> {{item.semester}}</div>
+                <div class="col-md-4 section-batch">
+                  <strong>Section: </strong>{{item.section}}</div>
+              </div>
+          </mat-card>
+        </div>
+      </li>      
+    </ul>
+  </div>
+</div>

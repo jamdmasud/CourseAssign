@@ -1,0 +1,27 @@
+
+<div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+          <th>SL</th>
+          <th>Teacher Name</th>
+          <th>Initial</th>
+          <th>Total Credit</th>
+          <th>Assigned Credit</th>
+          <th>Remaining Credit</th>
+        </tr>
+      </thead>
+      <tbody class="max-table">
+        <tr *ngFor="let teacher of teachers; let i = index">
+        <td>{{i+ 1}}</td>
+        <td>{{teacher.teacher}}</td>
+        <td>{{teacher.initial}}</td>
+        <td>{{teacher.takenCredit}}</td>
+        <td>{{teacher.assignedCredit}}</td>
+        <td>{{teacher.takenCredit - teacher.assignedCredit}}</td> 
+      </tr>
+      </tbody>
+      </table>
+    </div>
+  </div>

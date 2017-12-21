@@ -1,0 +1,49 @@
+thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+tbody {
+    display: block;
+    max-height: 500px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*Use the following to make sure cols align correctly*/
+thead{
+    width: 98%
+}
+tbody{
+    width: 100%;
+}
+table, tr, th, td {
+    border-collapse: collapse;
+}
+
+
+/*Set your columns to where you want them to be, skip the one that you can have resize to any width*/
+    th:nth-child(1), td:nth-child(1) {
+    width: 10%;
+}
+th:nth-child(2), td:nth-child(2) {
+    width: 30%;
+}
+th:nth-child(3), td:nth-child(3) {
+    width: 15%;
+}
+th:nth-child(4), td:nth-child(4) {
+    width: 15%;
+}
+th:nth-child(5), td:nth-child(5) {
+    width: 15%;
+}
+th:nth-child(6), td:nth-child(6) {
+    width: 15%;
+}

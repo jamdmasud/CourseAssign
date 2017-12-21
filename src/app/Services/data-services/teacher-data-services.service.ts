@@ -16,4 +16,12 @@ export class TeacherDataServicesService {
    getTeacher():any {
     return this.http.get(this.server + '/api/teacher/teachers').map(res => res.json());
    }
+
+   getPresentCredit(id: string):any {
+    return this.http.get(this.server + '/api/teacher/teachers-present-credit/'+id).map(res => res.json());
+   }
+
+  TeacherRemainingCredit():any{
+    return this.http.get(this.server + '/api/teacher/remaining-teacher-credit').map(res => res.json());
+   }
 }

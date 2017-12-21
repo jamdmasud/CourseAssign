@@ -1,0 +1,33 @@
+<ng2-toasty [position]="'top-right'"></ng2-toasty>
+<mat-card>
+  <h2> Add Course</h2>
+  <form [formGroup]="sectionForm" (ngSubmit)="saveSection(sectionForm.value,sectionForm.valid)">
+    <div class="row">
+      <div class="col-lg-6">
+          <mat-form-field class="input-field">
+              <mat-select  formControlName="name"  placeholder="Select Section">
+                <mat-option *ngFor="let section of sections" [value]="section.name">
+                  {{ section.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="sectionForm.controls['name'].errors?.required">
+                  <strong><Section></Section></strong> is required</mat-error>    
+        </mat-form-field>
+      </div> 
+      <div class="col-lg-6">
+          <mat-form-field class="input-field">
+              <mat-select  formControlName="batchId"  placeholder="Select Batch">
+                <mat-option *ngFor="let batche of batches" [value]="batche.id">
+                  {{ batche.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="sectionForm.controls['batchId'].errors?.required">
+                  <strong>Batch</strong> is required</mat-error>    
+        </mat-form-field>
+      </div>      
+      <div class="col-lg-12">
+        <button type="submit" mat-raised-button color="primary">Save Course</button>
+      </div>
+    </div>
+  </form>
+</mat-card>

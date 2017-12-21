@@ -45,7 +45,7 @@ export class SubmitExcelComponent implements OnInit {
     },error =>{
       this.toastyService.error({
         title: "Failed!",
-        msg: error,
+        msg: error.json().message,
         showClose: true,
         timeout: 5000,
         theme: "default"

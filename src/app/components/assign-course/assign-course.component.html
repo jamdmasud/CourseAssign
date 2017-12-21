@@ -9,9 +9,9 @@
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Teacher" aria-label="Teacher" [matAutocomplete]="auto" [formControl]="teacherCtrl">
             <mat-autocomplete #auto="matAutocomplete">
-              <mat-option  (onSelectionChange)="SelectTeacher($event,teacher)" *ngFor="let teacher of filteredTeacher | async" [value]="teacher.Name"> 
-                <span class="auto-title">{{ teacher.Name }}</span> |
-                <small class="sub-title">Initial: {{teacher.Initial}}</small>
+              <mat-option  (onSelectionChange)="SelectTeacher($event,teacher)" *ngFor="let teacher of filteredTeacher | async" [value]="teacher.name"> 
+                <span class="auto-title">{{ teacher.name }}</span> |
+                <small class="sub-title">Initial: {{teacher.initial}}</small>
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -31,9 +31,9 @@
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Course" aria-label="Course" [matAutocomplete]="course" [formControl]="courseCtrl">
             <mat-autocomplete #course="matAutocomplete">
-              <mat-option  (onSelectionChange)="SelectdCourse($event,course)" *ngFor="let course of filteredCourse | async" [value]="course.Name"> 
-                <span class="auto-title">{{ course.Name }}</span> |
-                <small class="sub-title">Semester: {{course.Batch}}</small>
+              <mat-option  (onSelectionChange)="SelectdCourse($event,course)" *ngFor="let course of filteredCourse | async" [value]="course.name"> 
+                <span class="auto-title">{{ course.name }}</span> |
+                <small class="sub-title">Semester: {{course.batch}}</small>
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -41,8 +41,8 @@
         <div class="col-md-3">  
           <mat-form-field>
             <mat-select [(ngModel)]="selectedSectionId" (change)="SelectdSection(selectedSectionId)"  placeholder="Select Section" [formControl]="sectionCtrl">
-              <mat-option *ngFor="let section of Sections" [value]="section.Id">
-                {{ section.Name }}
+              <mat-option *ngFor="let section of Sections" [value]="section.id">
+                {{ section.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>     
@@ -64,14 +64,14 @@
           <mat-card>
               <div class="row">
                 <div class="col-md-12">
-                  <h3 class="teacher-name">{{item.TeacherName}}</h3>
+                  <h3 class="teacher-name">{{item.teacherName}}</h3>
                 </div>
                 <div class="col-md-12 course-name">
-                  <strong>Course : </strong> {{ item.CourseName}}</div>
+                  <strong>Course : </strong> {{ item.courseName}}</div>
                 <div class="col-md-8 section-batch">
-                  <strong>Semester: </strong> {{item.Semester}}</div>
+                  <strong>Semester: </strong> {{item.semester}}</div>
                 <div class="col-md-4 section-batch">
-                  <strong>Section: </strong>{{item.SectionName}}</div>
+                  <strong>Section: </strong>{{item.sectionName}}</div>
               </div>
           </mat-card>
         </div>
