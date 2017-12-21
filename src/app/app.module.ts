@@ -73,7 +73,9 @@ import { AddTeacherComponent } from './components/add-teacher/add-teacher.compon
 import { ViewAssignedComponent } from './components/view-assigned/view-assigned.component';
 import { SearchPipe } from './Models/search.pipe';
 import { TeacherCreditComponent } from './components/teacher-credit/teacher-credit.component';
-import { CourseCreditComponent } from './components/course-credit/course-credit.component'
+import { CourseCreditComponent } from './components/course-credit/course-credit.component';
+import { ChangePasswordComponent } from './components/modal/change-password/change-password.component';
+import { ResetPasswordComponent } from './components/modal/reset-password/reset-password.component'
 
 
 export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions) {
@@ -103,7 +105,9 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     ViewAssignedComponent,
     SearchPipe,
     TeacherCreditComponent,
-    CourseCreditComponent,    
+    CourseCreditComponent,
+    ChangePasswordComponent,
+    ResetPasswordComponent,    
   ],
   imports: [
     MatAutocompleteModule,
@@ -147,6 +151,7 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     AppRoutingModule,
     FlexLayoutModule
   ],
+  entryComponents: [ChangePasswordComponent, ResetPasswordComponent],
   exports:[BrowserModule, ToastyModule,RouterModule ],
   providers: [XlsxToJsonService,AuthService,AuthGuard,CreditService,TeacherDataServicesService,CourseServiceService,
     SectionServicesService,BatchService,JsonToXlsxService,
