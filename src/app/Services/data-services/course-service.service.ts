@@ -26,4 +26,8 @@ export class CourseServiceService {
    assignedCourses():any{
     return this.http.get(this.server + '/api/teacher/assigned-courses').map(res => res.json());
    }
+   
+   getAssignedCourses():any{
+    return this.http.get(this.server + '/api/course/assigned-course').map(res => res.json());
+   }
 }

@@ -38,7 +38,7 @@ export class XlsxToJsonService {
             sheets[sheetName] = this.parseSheet(sheet, readCells);
         });
         return sheets;
-    }
+    } 
 
     parseSheet(sheet, readCells) {
         let range = XLSX.utils.decode_range(sheet['!ref']);

@@ -30,7 +30,15 @@ export class AuthService {
    }
 
   registration(data:any,http:Http){
-      return http.post(this.serverPath +'/api/account/registration',data);
+      return http.post(this.serverPath +'/api/accounts/registration',data);
+  }
+
+  changePassword (data) {
+    return this.http.post(this.serverPath +'/api/accounts/ChangePassword',data).map(res => res.json());
+  }
+
+  resetPassword (data) {
+    return this.http.post(this.serverPath +'/api/accounts/ResetPassword',data).map(res => res.json());
   }
 
   contentHeaders() {
@@ -54,10 +62,17 @@ export class AuthService {
       const tokenDecode = this.jwtHelper.decodeToken(token);
       return tokenDecode['unique_name'];
     }
-
     return null;
   }
-
+  
+  getLoggedRole() {
+    if (localStorage.getItem('accessToken')) {
+      const token = localStorage.getItem('accessToken');
+      const tokenDecode = this.jwtHelper.decodeToken(token);
+      return tokenDecode['role'];
+    }
+    return null;
+  }
 }
 
 @Injectable()

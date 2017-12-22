@@ -12,6 +12,7 @@ import { JsonToXlsxService} from '../../Services/Untilities/json-to-xlsx.service
 export class ViewAssignedComponent implements OnInit {
 
   public assignedCourses;
+  public courseReport;
   constructor( private toast: ToastyService,private courseService: CourseServiceService, private xlsx: JsonToXlsxService) { }
 
 
@@ -34,6 +35,17 @@ export class ViewAssignedComponent implements OnInit {
   }
 
   export(){
-    this.xlsx.exportAsExcelFile(this.assignedCourses, "assignedCourse")
+    this.courseService.getAssignedCourses().subscribe(response =>{
+      this.courseReport = response;
+    }, error =>{
+      this.toast.error({
+        title: "Assigned",
+        msg: error.json().message,
+        showClose: true,
+        timeout: 3000,
+        theme: "default"
+      });
+    });
+    this.xlsx.exportAsExcelFile(this.courseReport, "AssignedCourse");
   }
 }

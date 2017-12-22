@@ -15,7 +15,9 @@ export class SidebarComponent implements OnInit {
   }
 
   openModal() {
-    const dialogRef = this.dialog.open(ResetPasswordComponent);
+    const dialogRef = this.dialog.open(ResetPasswordComponent, {
+      width : '400px'
+    });
   }
 
 }

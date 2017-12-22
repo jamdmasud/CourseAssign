@@ -17,7 +17,9 @@ export class NavbarComponent implements OnInit {
   }
 
   openModal () {
-    const dialogRef = this.dialog.open(ChangePasswordComponent, {});
+    const dialogRef = this.dialog.open(ChangePasswordComponent, {
+      width: '400px'
+    });
   }
 
 }
