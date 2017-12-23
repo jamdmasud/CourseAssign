@@ -24,4 +24,8 @@ export class TeacherDataServicesService {
   TeacherRemainingCredit():any{
     return this.http.get(this.server + '/api/teacher/remaining-teacher-credit').map(res => res.json());
    }
+
+   getMyInfo():any{
+    return this.http.get(this.server + '/api/teacher/logged-in-teacher-info').map(res => res.json());
+   }
 }

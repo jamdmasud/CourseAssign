@@ -14,11 +14,13 @@ import { AddTeacherComponent } from './components/add-teacher/add-teacher.compon
 import { ViewAssignedComponent } from './components/view-assigned/view-assigned.component';
 import { CourseCreditComponent } from './components/course-credit/course-credit.component';
 import { TeacherCreditComponent } from './components/teacher-credit/teacher-credit.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component'
 
 
 const routes: Routes = [  
   {path:'', component:HomeComponent, children: [
-    {path: '', redirectTo: 'upload-teacher', pathMatch: 'full'},
+    {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+    {path:'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
     {path:'upload-teacher', component: SubmitExcelComponent, canActivate: [AuthGuard]},
     {path:'upload-courses', component: UploadCourseComponent, canActivate: [AuthGuard]},
     {path:'assign-course', component: AssignCourseComponent, canActivate: [AuthGuard]},

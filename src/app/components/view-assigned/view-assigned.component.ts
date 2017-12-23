@@ -23,6 +23,7 @@ export class ViewAssignedComponent implements OnInit {
   getAssignedCourses(){
     this.courseService.assignedCourses().subscribe(response=>{
       this.assignedCourses = response;
+      console.log(this.assignedCourses);
     },error=>{
       this.toast.error({
         title: "Assigned",
@@ -37,6 +38,7 @@ export class ViewAssignedComponent implements OnInit {
   export(){
     this.courseService.getAssignedCourses().subscribe(response =>{
       this.courseReport = response;
+      console.log(this.courseReport);
     }, error =>{
       this.toast.error({
         title: "Assigned",

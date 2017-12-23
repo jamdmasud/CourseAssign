@@ -75,7 +75,8 @@ import { SearchPipe } from './Models/search.pipe';
 import { TeacherCreditComponent } from './components/teacher-credit/teacher-credit.component';
 import { CourseCreditComponent } from './components/course-credit/course-credit.component';
 import { ChangePasswordComponent } from './components/modal/change-password/change-password.component';
-import { ResetPasswordComponent } from './components/modal/reset-password/reset-password.component'
+import { ResetPasswordComponent } from './components/modal/reset-password/reset-password.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component'
 
 
 export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions) {
@@ -107,7 +108,8 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
     TeacherCreditComponent,
     CourseCreditComponent,
     ChangePasswordComponent,
-    ResetPasswordComponent,    
+    ResetPasswordComponent,
+    DashboardComponent,    
   ],
   imports: [
     MatAutocompleteModule,
